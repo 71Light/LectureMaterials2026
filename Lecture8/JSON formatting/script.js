@@ -10,3 +10,4 @@ const example = {
 const jsonString = JSON.stringify(example);
 
 console.log(jsonString);
+// Function is gone
