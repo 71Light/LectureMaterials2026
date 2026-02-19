@@ -86,11 +86,16 @@ async function updateYarn(index, oldYarn) {
         washable: newWashable
     };
 
-    await fetch(`${BASE_URL}/${index}`, {
+    const response = await fetch(`${BASE_URL}/${index}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedYarn)
     });
+
+    if (response.status === 404) {
+        alert("Warning: Yarn not found (404).");
+        return;
+    }
 
     loadYarns();
 }
@@ -98,6 +103,7 @@ async function updateYarn(index, oldYarn) {
 // DELETE
 async function deleteYarn(index) {
     await fetch(`${BASE_URL}/${index}`, { method: "DELETE" });
+
     loadYarns();
 }
 
